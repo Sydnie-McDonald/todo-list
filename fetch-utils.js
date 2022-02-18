@@ -18,7 +18,7 @@ export async function createTodo(todo) {
 
 export async function deleteAllTodos() {
     // delete all todos for this user in supabase
-    await client
+    const response = await client
         .from('todos')
         .delete()
         .match({ user_id: client.auth.user().id, });
@@ -58,13 +58,13 @@ export function checkAuth() {
     if (!user) location.replace('../');
 }
 
-export function redirectIfLoggedIn() {
+export async function redirectIfLoggedIn() {
     if (await getUser()) {
         location.replace('./todos');
     }
 }
 
-export function signupUser(email, password) {
+export async function signupUser(email, password) {
     const response = await client.auth.signUp({ email, password });
 
     return response.user;
