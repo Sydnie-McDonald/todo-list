@@ -38,7 +38,13 @@ async function displayTodos() {
 
 // add an on load listener that fetches and displays todos on load
 window.addEventListener('load', async () => {
-    const todoList = await 
+    const todoList = await getTodos();
+    for (let todo of todos) {
+        const li = renderTodo(todo);
+        todosEl.append(li);
+    }
+});
+
 logoutButton.addEventListener('click', () => {
     logout();
 });
